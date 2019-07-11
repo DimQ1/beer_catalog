@@ -1,6 +1,6 @@
 const LoggerFactory = require('./loggerFactory');
-const logger = require('../../common/logger')();
+const log = require('../../common/log');
 
-const loggerFactory = new LoggerFactory(logger);
+const loggerFactory = new LoggerFactory(log);
 
 module.exports = loggerFactory.create('errorLogger');

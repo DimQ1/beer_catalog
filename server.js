@@ -5,7 +5,7 @@ const jwt = require('express-jwt');
 const errorHandlerMiddelware = require('./api/middlewares/errorHandler');
 const errorLoggerMiddelware = require('./api/middlewares/errorLogger');
 const requestLoggerMiddelware = require('./api/middlewares/requestLogger');
-const logger = require('./common/logger')();
+const log = require('./common/log');
 const routes = require('./api/routes');
 const notFoundMiddelware = require('./api/middlewares/notFound');
 const { secret } = require('./config');
@@ -27,5 +27,5 @@ app.use(errorLoggerMiddelware);
 app.use(errorHandlerMiddelware);
 
 app.listen(port, () => {
-    logger.info(`Server listening on port ${port}`);
+    log.info(`Server listening on port ${port}`);
 });

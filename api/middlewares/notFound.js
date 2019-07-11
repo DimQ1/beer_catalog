@@ -1,9 +1,9 @@
-const logger = require('../../common/logger')();
+const log = require('../../common/log');
 
 
 module.exports = (req, res, next) => {
     const message = 'Sorry cant find that!';
-    logger.debug(`url request ${req.url} response => ${message}`);
+    log.debug(`url request ${req.url} response => ${message}`);
 
     res.status(404)
         .json({
