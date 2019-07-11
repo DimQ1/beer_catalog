@@ -29,7 +29,7 @@ class BaseRepository {
         return updateResult;
     }
 
-    async findByAgregateQuery(query, limit, skip) {
+    async findByAgregateQuery(query, limit = 10, skip = 0) {
         const mongoQuery = this._convertQuery(query);
 
         const findResultPromise = this.Model.aggregate(mongoQuery)
@@ -53,10 +53,10 @@ class BaseRepository {
         const findResult = await findResultPromise;
         const countResult = await countResultPromise;
 
-        return { findResult, countResult: countResult.length ? countResult[0].count : 0 };
+        return { findResult, count: countResult.length ? countResult[0].count : 0 };
     }
 
-    async getAll(query, limit, skip) {
+    async getAll(query, limit = 10, skip = 0) {
         const mongoQuery = this._convertQuery(query);
         const findResultPromise = this.Model.find(mongoQuery)
             .limit(parseInt(limit, 10))
@@ -65,15 +65,15 @@ class BaseRepository {
             .exec();
 
         const countResultPromise = this.Model.find(mongoQuery)
-            .count()
+            .estimatedDocumentCount()
             .exec();
 
         await Promise.all([findResultPromise, countResultPromise]);
 
         const findResult = await findResultPromise;
-        const countResult = await countResultPromise;
+        const count = await countResultPromise;
 
-        return { findResult, countResult };
+        return { findResult, count };
     }
 
     async findById(id) {
