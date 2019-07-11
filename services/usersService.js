@@ -12,14 +12,22 @@ class UserService {
         };
     }
 
-    async getAll() {
+    async getAll(limit = 10, skip = 0) {
         const allUsers = await users.getAll({});
         if (!allUsers) {
             return null;
         }
-        const allUsersWithoutPasswords = allUsers.map(user => this._getUserWithoutPassword(user));
+        const allUsersWithoutPasswords = allUsers.findResult.map(user => this._getUserWithoutPassword(user));
 
-        return allUsersWithoutPasswords;
+        const allUsersResult = {
+            limit,
+            skip,
+            items: allUsersWithoutPasswords.length,
+            count: allUsers.count,
+            users: allUsersWithoutPasswords
+        };
+
+        return allUsersResult;
     }
 
     async getById(id) {
