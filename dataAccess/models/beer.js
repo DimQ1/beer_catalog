@@ -1,13 +1,22 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
+const imageLinkSchema = require('./imageLink');
+
 
 const beerSchema = new Schema({
     _id: Schema.Types.ObjectId,
     title: {
-        type: String,
-        unique: true,
-        dropDups: true
+        name: {
+            type: String,
+            required: true,
+            unique: true,
+            dropDups: true
+        },
+        tangle: {
+            type: String,
+            required: true
+        }
     },
     propeties: {
         AlcoholByVolume: {
@@ -27,37 +36,12 @@ const beerSchema = new Schema({
         }
     },
     foodPairingList: [String],
-    imageLink: String,
-    description: String
-});
-
-const brewSchema = new Schema({
-    _id: Schema.Types.ObjectId,
-    title: {
-        type: String,
-        unique: true,
-        dropDups: true
-    },
-    propeties: {
-        AlcoholByVolume: {
-            type: Number,
-            max: 14,
-            min: 2
-        },
-        InternationalBitternessUnits: {
-            type: Number,
-            max: 120,
-            min: 0
-        },
-        ColorByEuropeanBreweryConvention: {
-            type: Number,
-            max: 80,
-            min: 4
-        }
-    },
-    foodPairingList: [String],
-    imageLink: String,
-    description: String
+    imageLink: imageLinkSchema,
+    description: String,
+    brew: {
+        type: Schema.Types.ObjectId,
+        ref: 'brew'
+    }
 });
 
 module.exports = mongoose.model('Beer', beerSchema);
