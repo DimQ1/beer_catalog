@@ -5,7 +5,6 @@ const imageLinkSchema = require('./imageLink');
 
 
 const beerSchema = new Schema({
-    _id: Schema.Types.ObjectId,
     title: {
         name: {
             type: String,

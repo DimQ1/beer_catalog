@@ -4,7 +4,6 @@ const { Schema } = mongoose;
 const imageLinkSchema = require('./imageLink');
 
 const brewSchema = new Schema({
-    _id: Schema.Types.ObjectId,
     date: {
         type: Date,
         required: true

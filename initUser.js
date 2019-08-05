@@ -16,4 +16,5 @@ mongoose.connect(connectionString, { useNewUrlParser: true, useCreateIndex: true
         role: 'Admin'
 
     });
+    process.exit();
 })();

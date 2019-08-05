@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-    _id: Schema.Types.ObjectId,
     login: {
         type: String,
         unique: true,
