@@ -29,6 +29,15 @@ class QueryConverter {
                     case 'match':
                         mongoParametr.$match = parametr[parametrKey];
                         break;
+                    case 'lookup':
+                        mongoParametr.$lookup = parametr[parametrKey];
+                        break;
+                    case 'project':
+                        mongoParametr.$project = parametr[parametrKey];
+                        break;
+                    case 'regex':
+                        mongoParametr.$regex = parametr[parametrKey];
+                        break;
                     case '!':
                         if (parametr[parametrKey] instanceof Array) {
                             mongoParametr.$not = { $in: parametr[parametrKey] };

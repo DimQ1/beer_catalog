@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 const imageLinkSchema = require('./imageLink');
-
+const brewSchema = require('./brew');
 
 const beerSchema = new Schema({
     title: {
@@ -37,10 +37,7 @@ const beerSchema = new Schema({
     foodPairingList: [String],
     imageLink: imageLinkSchema,
     description: String,
-    brew: {
-        type: Schema.Types.ObjectId,
-        ref: 'brew'
-    }
+    brew: brewSchema
 });
 
 module.exports = mongoose.model('Beer', beerSchema);

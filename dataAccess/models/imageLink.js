@@ -4,13 +4,11 @@ const { Schema } = mongoose;
 
 const imageLinkSchema = new Schema(
     {
-        imageLink: {
-            path: {
-                type: String,
-                required: true
-            },
-            description: String
-        }
+        path: {
+            type: String,
+            required: true
+        },
+        description: String
     }
 );
 
