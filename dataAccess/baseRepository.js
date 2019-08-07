@@ -82,8 +82,8 @@ class BaseRepository {
         return findResult;
     }
 
-    async findOne(name) {
-        const findResult = await this.Model.findOne(name);
+    async findOne(query) {
+        const findResult = await this.Model.findOne(query);
 
         return findResult;
     }

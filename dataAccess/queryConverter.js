@@ -1,7 +1,11 @@
+const mongoose = require('mongoose');
+
 class QueryConverter {
     _convertToMongoParameter(query, key) {
         const parametr = query[key];
-        if (!(parametr instanceof Object)) {
+        const { ObjectId } = mongoose.Types.ObjectId;
+
+        if (!(parametr instanceof Object) || parametr instanceof ObjectId) {
             return parametr;
         }
         const mongoParametr = {};

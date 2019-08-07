@@ -1,6 +1,5 @@
 const beerService = require('../../services/beerService');
 
-
 class BeerController {
     async getAll(req, res) {
         const { query } = req;

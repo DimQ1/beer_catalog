@@ -1,6 +1,6 @@
+const mongoose = require('mongoose');
 const BaseRepository = require('./baseRepository');
 const Beer = require('./models/beer');
-const favoriteRepository = require('./favoriteRepository');
 
 class BeerRepository extends BaseRepository {
     constructor() {
@@ -35,6 +35,8 @@ class BeerRepository extends BaseRepository {
     }
 
     async getAllWithFavoriteField(query, userId, limit, skip) {
+        const { ObjectId } = mongoose.Types;
+        const userObjectId = new ObjectId(userId);
         const localQuery = this._convertPropetiesToInteger(query);
         const agregateQuery = [
             {
@@ -48,7 +50,7 @@ class BeerRepository extends BaseRepository {
                                 {
                                     $and: [
                                         { $in: ['$$beer_id', '$beers'] },
-                                        { $eq: ['$user', userId] }
+                                        { $eq: ['$user', userObjectId] }
                                     ]
                                 }
                             }
@@ -85,18 +87,14 @@ class BeerRepository extends BaseRepository {
     }
 
     async findById(id, userId) {
-        const findResult = await this.Model.findById(id);
-        if (!findResult) {
+        const { ObjectId } = mongoose.Types;
+        const beerIdObjectId = new ObjectId(id);
+        const result = await this.getAllWithFavoriteField({ _id: beerIdObjectId }, userId);
+        if (result.count === 0) {
             return null;
         }
-        const favorites = favoriteRepository.getAll({ beers: findResult.id, user: userId });
-        if (favorites) {
-            findResult.favorite = true;
-        } else {
-            findResult.favorite = false;
-        }
 
-        return findResult;
+        return result.findResult[0];
     }
 }
 module.exports = new BeerRepository();

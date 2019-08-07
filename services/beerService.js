@@ -27,6 +27,7 @@ class BeerService {
 
     async getAll(query, userId) {
         const { limit, skip, ...findQuery } = query || {};
+
         const allBeers = await beerRepository.getAllWithFavoriteField(findQuery, userId, limit || 10, skip || 0);
         if (!allBeers) {
             return null;
