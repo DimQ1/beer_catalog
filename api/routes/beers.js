@@ -2,7 +2,7 @@ const { Router } = require('express');
 
 const router = Router();
 const expressJoiValidator = require('express-joi-validator');
-const userValidators = require('../controllers/validators/userValidators');
+const beerValidators = require('../controllers/validators/beerValidators');
 const role = require('../../common/role');
 const authorize = require('../middlewares/authorize');
 const { beerController } = require('../controllers');
@@ -11,11 +11,14 @@ const errorCatcher = require('../../common/errorCatcher');
 router.get('/',
     errorCatcher(beerController.getAll));
 router.get('/:id',
+    expressJoiValidator(beerValidators.paramsBeerId),
     errorCatcher(beerController.getById));
 router.post('/',
+    expressJoiValidator(beerValidators.beer),
     errorCatcher(authorize(role.Admin)),
     errorCatcher(beerController.create));
 router.delete('/:id',
+    expressJoiValidator(beerValidators.paramsBeerId),
     errorCatcher(authorize(role.Admin)),
     errorCatcher(beerController.deleteById));
 
