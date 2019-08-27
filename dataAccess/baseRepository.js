@@ -48,10 +48,7 @@ class BaseRepository {
 
         const countResultPromise = this.Model.aggregate(mongoQueryCount);
 
-        await Promise.all([findResultPromise, countResultPromise]);
-
-        const findResult = await findResultPromise;
-        const countResult = await countResultPromise;
+        const [findResult, countResult] = await Promise.all([findResultPromise, countResultPromise]);
 
         return { findResult, count: countResult.length ? countResult[0].count : 0 };
     }
