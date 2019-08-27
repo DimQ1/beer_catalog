@@ -15,7 +15,13 @@ class FavoriteController {
         const { user } = req;
 
         const addResult = await favoriteService.addFavorite(user.sub, params.id);
-        res.json(addResult || { result: 'Not found!' });
+
+        if (addResult) {
+            res.json(addResult);
+        } else {
+            res.status(204)
+                .send();
+        }
     }
 
     async removeFavorite(req, res) {
@@ -23,7 +29,13 @@ class FavoriteController {
         const { user } = req;
 
         const removeResult = await favoriteService.removeFavorite(user.sub, params.id);
-        res.json(removeResult || { result: 'Not found!' });
+
+        if (removeResult) {
+            res.json(removeResult);
+        } else {
+            res.status(204)
+                .send();
+        }
     }
 }
 

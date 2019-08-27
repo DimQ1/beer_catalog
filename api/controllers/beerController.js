@@ -14,7 +14,13 @@ class BeerController {
         const { user } = req;
 
         const beers = await beerService.getById(params.id, user.sub);
-        res.json(beers || { result: 'Not found!' });
+
+        if (beers) {
+            res.json(beers);
+        } else {
+            res.status(204)
+                .send();
+        }
     }
 
     async create(req, res) {
@@ -28,7 +34,13 @@ class BeerController {
         const { params } = req;
 
         const deleteResult = await beerService.deleteById(params.id);
-        res.json(deleteResult || { result: 'Not found!' });
+
+        if (deleteResult) {
+            res.json(deleteResult);
+        } else {
+            res.status(204)
+                .send();
+        }
     }
 }
 
