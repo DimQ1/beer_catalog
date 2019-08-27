@@ -11,14 +11,12 @@ const errorCatcher = require('../../common/errorCatcher');
 router.get('/',
     errorCatcher(beerController.getAll));
 router.get('/:id',
-    expressJoiValidator(beerValidators.paramsBeerId),
     errorCatcher(beerController.getById));
 router.post('/',
     expressJoiValidator(beerValidators.beer),
     errorCatcher(authorize(role.Admin)),
     errorCatcher(beerController.create));
 router.delete('/:id',
-    expressJoiValidator(beerValidators.paramsBeerId),
     errorCatcher(authorize(role.Admin)),
     errorCatcher(beerController.deleteById));
 

@@ -18,17 +18,17 @@ const beerSchema = new Schema({
         }
     },
     propeties: {
-        AlcoholByVolume: {
+        alcoholByVolume: {
             type: Number,
             max: 14,
             min: 2
         },
-        InternationalBitternessUnits: {
+        internationalBitternessUnits: {
             type: Number,
             max: 120,
             min: 0
         },
-        ColorByEuropeanBreweryConvention: {
+        colorByEuropeanBreweryConvention: {
             type: Number,
             max: 80,
             min: 4
