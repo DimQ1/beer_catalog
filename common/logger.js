@@ -8,7 +8,7 @@ class ConfigLogger {
     getlogger() {
         const logger = createLogger();
         switch (this.nodeEnv) {
-            case 'prodaction':
+            case 'production':
                 logger.add(new transports.File({
                     filename: 'logs/combined.log',
                     format: format.json()
