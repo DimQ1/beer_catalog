@@ -1,20 +1,17 @@
+const get = require('lodash.get');
 const favoriteService = require('../../services/favoriteService');
 
 class FavoriteController {
     async getAll(req, res) {
-        const { query } = req;
-        const { user } = req;
-        const { limit, skip } = query || {};
+        const limit = get(req.query, 'limit', 10);
+        const skip = get(req.query, 'skip', 0);
 
-        const beers = await favoriteService.getAll(user.sub, limit, skip);
+        const beers = await favoriteService.getAll(req.user.sub, limit, skip);
         res.json(beers);
     }
 
     async addFavorite(req, res) {
-        const { params } = req;
-        const { user } = req;
-
-        const addResult = await favoriteService.addFavorite(user.sub, params.id);
+        const addResult = await favoriteService.addFavorite(req.user.sub, req.params.id);
 
         if (addResult) {
             res.json(addResult);
@@ -25,10 +22,7 @@ class FavoriteController {
     }
 
     async removeFavorite(req, res) {
-        const { params } = req;
-        const { user } = req;
-
-        const removeResult = await favoriteService.removeFavorite(user.sub, params.id);
+        const removeResult = await favoriteService.removeFavorite(req.user.sub, req.params.id);
 
         if (removeResult) {
             res.json(removeResult);

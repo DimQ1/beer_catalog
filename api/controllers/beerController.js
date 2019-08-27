@@ -2,18 +2,12 @@ const beerService = require('../../services/beerService');
 
 class BeerController {
     async getAll(req, res) {
-        const { query } = req;
-        const { user } = req;
-
-        const beers = await beerService.getAll(query, user.sub);
+        const beers = await beerService.getAll(req.user.sub, req.query);
         res.json(beers);
     }
 
     async getById(req, res) {
-        const { params } = req;
-        const { user } = req;
-
-        const beers = await beerService.getById(params.id, user.sub);
+        const beers = await beerService.getById(req.user.sub, req.params.id);
 
         if (beers) {
             res.json(beers);
@@ -24,16 +18,12 @@ class BeerController {
     }
 
     async create(req, res) {
-        const { body } = req;
-
-        const createResult = await beerService.create(body);
+        const createResult = await beerService.create(req.body);
         res.json(createResult);
     }
 
     async deleteById(req, res) {
-        const { params } = req;
-
-        const deleteResult = await beerService.deleteById(params.id);
+        const deleteResult = await beerService.deleteById(req.params.id);
 
         if (deleteResult) {
             res.json(deleteResult);

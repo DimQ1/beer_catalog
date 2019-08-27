@@ -13,7 +13,7 @@ class UserService {
     }
 
     async getAll(limit = 10, skip = 0) {
-        const allUsers = await users.getAll({});
+        const allUsers = await users.getAll({}, limit, skip);
         if (!allUsers) {
             return null;
         }

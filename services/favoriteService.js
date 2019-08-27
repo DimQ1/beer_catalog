@@ -1,8 +1,8 @@
 const favoriteRepository = require('../dataAccess/favoriteRepository');
 
 class FavoriteService {
-    async getAll(userId, limit, skip) {
-        const favorites = await favoriteRepository.getAll({ user: userId }, limit || 10, skip || 0);
+    async getAll(userId, limit = 10, skip = 0) {
+        const favorites = await favoriteRepository.getAll({ user: userId }, limit, skip);
 
         return favorites;
     }

@@ -1,8 +1,11 @@
+const get = require('lodash.get');
 const userService = require('../../services/usersService');
 
 class UserController {
     async getAll(req, res) {
-        const users = await userService.getAll();
+        const limit = get(req.query, 'limit', 10);
+        const skip = get(req.query, 'skip', 0);
+        const users = await userService.getAll(limit, skip);
         res.json(users);
     }
 

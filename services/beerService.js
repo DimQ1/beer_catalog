@@ -1,3 +1,6 @@
+const get = require('lodash.get');
+const omit = require('lodash.omit');
+
 const beerRepository = require('../dataAccess/beerRepository');
 
 class BeerService {
@@ -16,7 +19,7 @@ class BeerService {
         return deleResult;
     }
 
-    async getById(id, userId) {
+    async getById(userId, id) {
         const beer = await beerRepository.findById(id, userId);
         if (!beer) {
             return null;
@@ -25,17 +28,19 @@ class BeerService {
         return beer;
     }
 
-    async getAll(query, userId) {
-        const { limit, skip, ...findQuery } = query || {};
+    async getAll(userId, query) {
+        const limit = get(query, 'query.limit', 10);
+        const skip = get(query, 'query.skip', 0);
+        const findQuery = omit(query, ['limit', 'skip']);
 
-        const allBeers = await beerRepository.getAllWithFavoriteField(findQuery, userId, limit || 10, skip || 0);
+        const allBeers = await beerRepository.getAllWithFavoriteField(findQuery, userId, limit, skip);
         if (!allBeers) {
             return null;
         }
 
         const allBeersResult = {
-            limit: limit || 10,
-            skip: skip || 0,
+            limit,
+            skip,
             items: allBeers.findResult.length,
             count: allBeers.count,
             beers: allBeers.findResult
