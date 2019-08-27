@@ -2,7 +2,7 @@ const { Router } = require('express');
 
 const router = Router();
 const expressJoiValidator = require('express-joi-validator');
-const userValidators = require('../controllers/validators/userValidators');
+const userValidators = require('../controllers/validators/user');
 const role = require('../../common/role');
 const authorize = require('../middlewares/authorize');
 const { userController } = require('../controllers');

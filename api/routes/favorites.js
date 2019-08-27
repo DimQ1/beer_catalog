@@ -2,7 +2,7 @@ const { Router } = require('express');
 
 const router = Router();
 const expressJoiValidator = require('express-joi-validator');
-const favoriteValidators = require('../controllers/validators/favoriteValidators');
+const favoriteValidators = require('../controllers/validators/favorite');
 const { favoriteController } = require('../controllers');
 const errorCatcher = require('../../common/errorCatcher');
 

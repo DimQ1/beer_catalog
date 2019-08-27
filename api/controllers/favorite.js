@@ -1,5 +1,5 @@
 const get = require('lodash.get');
-const favoriteService = require('../../services/favoriteService');
+const favoriteService = require('../../services/favorite');
 
 class FavoriteController {
     async getAll(req, res) {

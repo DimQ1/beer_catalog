@@ -1,5 +1,5 @@
 const get = require('lodash.get');
-const userService = require('../../services/usersService');
+const userService = require('../../services/users');
 
 class UserController {
     async getAll(req, res) {

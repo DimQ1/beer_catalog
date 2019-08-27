@@ -1,9 +1,9 @@
-const { userController } = require('./userController');
-const { loginController } = require('./loginController');
-const { beerController } = require('./beerController');
-const { favoriteController } = require('./favoriteController');
+const { userController } = require('./user');
+const { loginController } = require('./login');
+const { beerController } = require('./beer');
+const { favoriteController } = require('./favorite');
 
-const loginValidators = require('./validators/loginValidators');
+const loginValidators = require('./validators/login');
 
 module.exports = {
     userController,

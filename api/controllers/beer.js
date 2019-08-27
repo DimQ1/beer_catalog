@@ -1,4 +1,4 @@
-const beerService = require('../../services/beerService');
+const beerService = require('../../services/beer');
 
 class BeerController {
     async getAll(req, res) {
