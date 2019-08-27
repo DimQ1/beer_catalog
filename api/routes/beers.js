@@ -14,10 +14,10 @@ router.get('/:id',
     errorCatcher(beerController.getById));
 router.post('/',
     expressJoiValidator(beerValidators.beer),
-    errorCatcher(authorize(role.Admin)),
+    errorCatcher(authorize([role.Admin])),
     errorCatcher(beerController.create));
 router.delete('/:id',
-    errorCatcher(authorize(role.Admin)),
+    errorCatcher(authorize([role.Admin])),
     errorCatcher(beerController.deleteById));
 
 module.exports = router;

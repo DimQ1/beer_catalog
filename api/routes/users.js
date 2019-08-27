@@ -7,7 +7,7 @@ const { userController } = require('../controllers');
 const errorCatcher = require('../../common/errorCatcher');
 
 router.get('/',
-    errorCatcher(authorize(role.Admin)),
+    errorCatcher(authorize([role.Admin])),
     errorCatcher(userController.getAll));
 
 router.get('/:userId',
